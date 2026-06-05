@@ -21,7 +21,7 @@ ggplot(data = mpg)+
 
 # pag 11
 ggplot(data = mpg)+
-  geom_point(mapping = aes(x = displ, y = hwy), size = "blue")
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy), size = 3)
@@ -41,3 +41,28 @@ ggplot(data = mpg) +
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy), shape = 21, color = "blue", fill = "red")
 
+# pag 13
+ggplot(data = mpg)
+  + geom_point(mapping = aes(x = displ, y = hwy), shape = 21, color = "blue", fill = "red")
+
+# pag 14
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, nrow = 2)
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, nrow = 3)
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ cty, nrow = 2)
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_grid(drv ~ cyl)
+
+# pag 15
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_grid(. ~ cyl)
