@@ -1,0 +1,39 @@
+---
+title: "Exercícios - Capítulo 01"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+```
+
+Execute `ggplot(data = mpg)`. O que você vê?
+```{r}
+ggplot(data = mpg)
+```
+
+Quantas linhas existem em `mtcars`? e quantas colunas?
+```{r}
+nrow(mtcars)
+ncol(mtcars)
+```
+
+O que a variável `drv` faz?
+```{r}
+?mpg
+```
+
+Faça um gráfico de dispersão de `hmy` versus `cyl`
+```{r}
+ggplot(mpg, aes(x = hwy, y=cyl))+
+  geom_point()
+```
+
+Faça um gráfico de dispersão do `class` versus `drv`. pq não é útil?
+
+```{r}
+ggplot(mpg, aes(x = class, y = drv))+
+  geom_point()
+```
+

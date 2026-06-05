@@ -10,6 +10,7 @@ library(Lahman)
 tidyverse_update()
 
 dput(mtcars)
+
 mtcars <- structure(
   list(
     mpg = c(
