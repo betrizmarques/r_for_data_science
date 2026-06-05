@@ -14,6 +14,7 @@ library(tidyverse)
 ggplot(data = mpg)
 ```
 
+
 2. Quantas linhas existem em `mtcars`? e quantas colunas?
 
 ```{r}
@@ -90,6 +91,106 @@ ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy), shape = 21, color = "blue", fill = "red", stroke = 3)
 ```
 **Resposta:** Altera a grossura da borda dos pontos.
+
+6. O que acontece se você mapear uma estética a algo diferente de um nome de variável, como `aes(color = displ < 5)`
+
+```{r, error=TRUE}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = displ < 5, colour = displ < 5))
+```
+**Resposta:** Ele vai criar uma variável que assume `TRUE` se o valor da variável `displ` for menor que 5 e `FALSE` c.c.
+
+## Página 15
+
+1. O que acontece se você criar facetas em uma variável contínua?
+
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ displ, nrow = 2)
+```
+**Resposta:** Ele cria muitas facetas e fica difícil visualizar.
+
+2. O que significam células em branco em um gráfico com `facet_grid(drv ~ cyl)`? Como elas funcionam a este gráfico?
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = drv, y = cyl))
+```
+
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_grid(drv ~ cyl)
+```
+**Resposta:** Algumas facetas ficarão em branco pois não existem dados com essas combinações de valores das duas variáveis. Assim com no primeiro gráfico há valores que não possuem observações. 
+
+3. Que gráficos o código a seguir faz? 
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_grid(drv ~ .)
+```
+**Resposta:** Ele faz um grráfico onde não há colunas mas apenas linhas. Ao contrário do `facet_grid(. ~ drv)`, que só possui colunas e não linhas.
+
+4. Pegue o primeiro gráfico em facetas desta seção:
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, nrow = 2)
+```
+Quais são as vantagens de usar facetas, em vez de estética de cor? Quais são as desvatagens? Como o equilíbrio poderia mudar se tivesse um conjunto de dados maior?
+
+**Resposta:** A vantagem é que pode-se ver cada classe separadamente, sem que uma se sobreponha à outra. A desvantagem é que é um pouco mais demorado para se compreender algumas coisas nesse formato, pois se estivessem em um só gráfico com cores diferentes poderia ser mais rápida a compreensão. Quando há muitos valores diferentes de uma variável, fica quase impossível ter algum insight em cima desses gráficos, pois impossibilita a visualização de todos ao mesmo tempo.
+
+5. Leia `?facet_wrap`. O que o `nrow` faz? O que o `ncol` faz? Quais outras opções controlam o layout de painéis individuais? Por que `facet_grid` não tem variáveis `ncol` e `nrow`?  
+
+**Resposta:** `nrow` é o núemro de linhas que as facetas vão ter e `ncol` o número de colunas. Exemplo: se eu tiver 3 facetas e digitar `nrow = 3`, cada linha vai ficar com uma faceta.
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, nrow = 4, ncol = 2)
+```
+Outras opções são o argumento `space` que organiza as facetas conforme o eixo x ou y.
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, space = "free_x")
+```
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, space = "free_y")
+```
+O `as.table` que altera o layout colocando as facetas originais ao contrário (de baixo para cima).
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, as.table = TRUE)
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_wrap(~ class, as.table = FALSE)
+```
+
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_grid(~class)
+```
+O `facet_grid` não possui os argumentos `nrow` e `ncol` porque como são combunações de valores de variáveis, o número de linhas e colunas já é pré-definido.
+
+6. Ao usar `facet_grid()` você normalmente deveria colocar a variável com níveis mais singulres nas colunas. Por que?
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_grid(drv ~ fl)
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))+
+  facet_grid(fl ~ drv)
+```
+
+**Resposta:** Porque se colocarmos nas linhas as variáveis com multiplos níveis, os gráficos vão encolhendo muito ficando masi difícil de visualizar.
 
 
 
