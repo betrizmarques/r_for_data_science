@@ -221,9 +221,11 @@ ggplot(data = mpg)+
 **Resposta:** Porque se colocarmos nas linhas as variáveis com multiplos níveis, os gráficos vão encolhendo muito ficando masi difícil de visualizar.
 
 ## Página 20
-1. Que geom você usaria para desenhar um gráfico de linha? Um diagrama de caixa (boxplot)? Um histograma? Um gráfico de área?
+
+1.  Que geom você usaria para desenhar um gráfico de linha? Um diagrama de caixa (boxplot)? Um histograma? Um gráfico de área?
 
 **Resposta:**
+
 ```{r}
 ggplot(data = mpg, mapping = aes(x = displ))+
   geom_boxplot(fill = "#A599B5", color = "#00B9AE")
@@ -237,9 +239,10 @@ ggplot(data = mpg, mapping = aes(x = displ))+
 ggplot(data = mpg, mapping = aes(x = year, y = cyl))+
   geom_area(fill = "#00B9AE")
 ```
-2. Execute este código em sua cabeça e preveja como será o resultado. Depois execute o código em R e confira suas previsões.
 
-```
+2.  Execute este código em sua cabeça e preveja como será o resultado. Depois execute o código em R e confira suas previsões.
+
+```         
 ggplot(
     data = mpg,
     mapping = aes(x = displ, y = hwy, color = drv)
@@ -247,7 +250,9 @@ ggplot(
     geom_point()+
     geom_smooth(se = FALSE)
 ```
+
 **Resposta:** Ele criará um gráfico de dispersão entre `displ` e `hwy` com as cores sendo os diferentes valores da variável `drv`. Depois criará uma linha sem a sombra na borda dela, também com cores diferentes conforme a variável `drv`.
+
 ```{r}
 ggplot(
     data = mpg,
@@ -257,17 +262,15 @@ ggplot(
     geom_smooth(se = FALSE)
 ```
 
-
-3. O que `show_legend = FALSE` faz? O que acontece se você removê-lo? Por que você acha que usei isso anteriormente no capítulo?
+3.  O que `show_legend = FALSE` faz? O que acontece se você removê-lo? Por que você acha que usei isso anteriormente no capítulo?
 
 **Resposta:** Ele esconde a legenda de cores/formas/tamanhos do `mapping`. Caso removido ele mostra a legenda com cores. Acho que usou para mostrar que quando há cores envolvidas o `ggplot` automaticamente mostra a legenda, o que não acontece em outros gráficos sem cores como `aes.`
 
-4. O que o argumento `se`para `geom_smooth()` faz?
-**Resposta:** Esconde aquela sombra que fica em torno da linha.
+4.  O que o argumento `se`para `geom_smooth()` faz? **Resposta:** Esconde aquela sombra que fica em torno da linha.
 
-5. Esses gráficos serão diferentes? Por que/por que não?
+5.  Esses gráficos serão diferentes? Por que/por que não?
 
-```
+```         
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
   geom_point()+
   geom_smooth()
@@ -276,7 +279,9 @@ ggplot()+
   geom_point(data = mpg, mapping = aes(x = displ, y = hwy))+
   geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
 ```
+
 **Resposta:** Não serão diferentes pois o que muda é só a sintaxe.
+
 ```{r}
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
   geom_point()+
@@ -287,6 +292,30 @@ ggplot()+
   geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
 ```
 
+6. Recrie o código R necessário para gerar os seguintes gráficos:
 
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_point()+
+  geom_smooth(se = FALSE)
 
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_point()+
+  geom_smooth(aes(group = drv), se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_point(aes(color = drv))+
+  geom_smooth(aes(color = drv), se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_point(aes(color = drv))+
+  geom_smooth(se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_point(mapping = aes(color = drv))+
+  geom_smooth(mapping = aes(linetype = drv), se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv))+
+  geom_point(shape = 21, color = "white", size = 3,stroke = 2 )
+```
 
