@@ -3,39 +3,40 @@ title: "Exercícios - Capítulo 01"
 format: html
 editor: visual
 ---
+
 ## Página 6
+
 ```{r}
 library(tidyverse)
 ```
 
-1. Execute `ggplot(data = mpg)`. O que você vê?
+1.  Execute `ggplot(data = mpg)`. O que você vê?
 
 ```{r}
 ggplot(data = mpg)
 ```
 
-
-2. Quantas linhas existem em `mtcars`? e quantas colunas?
+2.  Quantas linhas existem em `mtcars`? e quantas colunas?
 
 ```{r}
 nrow(mtcars)
 ncol(mtcars)
 ```
 
-3. O que a variável `drv` faz?
+3.  O que a variável `drv` faz?
 
 ```{r}
 ?mpg
 ```
 
-4. Faça um gráfico de dispersão de `hmy` versus `cyl`
+4.  Faça um gráfico de dispersão de `hmy` versus `cyl`
 
 ```{r}
 ggplot(mpg, aes(x = hwy, y=cyl))+
   geom_point()
 ```
 
-5. Faça um gráfico de dispersão do `class` versus `drv`. pq não é útil?
+5.  Faça um gráfico de dispersão do `class` versus `drv`. pq não é útil?
 
 ```{r}
 ggplot(mpg, aes(x = class, y = drv))+
@@ -43,11 +44,14 @@ ggplot(mpg, aes(x = class, y = drv))+
 ```
 
 ## Página 12
-1. O que há de errado com este código? Por que os pontos não estão pretos?
+
+1.  O que há de errado com este código? Por que os pontos não estão pretos?
+
 ```{r}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
 ```
+
 **Resposta:** Talvez porque o argumento `color` está dentro da função `aes()`. Ele meio que está atribuindo `color` à uma "variável" chamada "blue". Exemplo de código com `color` fora da função:
 
 ```{r}
@@ -55,15 +59,18 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 ```
 
-2. Quais variáveis em `mpg` são categóricas? Quais variáveis são contínuas? Como você pode ver essa informação quando executa `mpg`?
+2.  Quais variáveis em `mpg` são categóricas? Quais variáveis são contínuas? Como você pode ver essa informação quando executa `mpg`?
+
 ```{r}
 ?mpg
 
 mpg
 ```
+
 **Resposta:** Consigo ver pelo cabeçalho das variáveis: onde está escrito `<int>` é porque são números inteiros, logo discretos, quando está escrito `<double>` é porque são números com casas decimais, logo contínuos.
 
-3. Mapeie uma variável contínua para `color`, `size` e `shape`. Como essas estéticasnse comportam de maneira diferente para variáveis categóricas e contínuas?
+3.  Mapeie uma variável contínua para `color`, `size` e `shape`. Como essas estéticasnse comportam de maneira diferente para variáveis categóricas e contínuas?
+
 ```{r, error=TRUE}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy, colour = displ))
@@ -75,43 +82,51 @@ ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy, shape = displ))
 
 ```
+
 **Resposta:** Para `color`e `size`, o código roda, mas ainda assim fica muito difícil de distinguir valores dessa forma. Para o argumento `shape` o código não roda, acho que principalmnete pelo número limitado de formas.
 
-4. O que acontece se você mapear a mesma variável a várias estéticas?
+4.  O que acontece se você mapear a mesma variável a várias estéticas?
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = displ, color = displ))
 ```
+
 **Resposta:** Ele vai mapear normalmentr, só não é muito informativo.
 
-5. O que a estética `stroke` faz? Com que formas ela trabalha?
+5.  O que a estética `stroke` faz? Com que formas ela trabalha?
+
 ```{r}
 ?geom_point
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy), shape = 21, color = "blue", fill = "red", stroke = 3)
 ```
+
 **Resposta:** Altera a grossura da borda dos pontos.
 
-6. O que acontece se você mapear uma estética a algo diferente de um nome de variável, como `aes(color = displ < 5)`
+6.  O que acontece se você mapear uma estética a algo diferente de um nome de variável, como `aes(color = displ < 5)`
 
 ```{r, error=TRUE}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = displ < 5, colour = displ < 5))
 ```
+
 **Resposta:** Ele vai criar uma variável que assume `TRUE` se o valor da variável `displ` for menor que 5 e `FALSE` c.c.
 
 ## Página 15
 
-1. O que acontece se você criar facetas em uma variável contínua?
+1.  O que acontece se você criar facetas em uma variável contínua?
 
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_wrap(~ displ, nrow = 2)
 ```
+
 **Resposta:** Ele cria muitas facetas e fica difícil visualizar.
 
-2. O que significam células em branco em um gráfico com `facet_grid(drv ~ cyl)`? Como elas funcionam a este gráfico?
+2.  O que significam células em branco em um gráfico com `facet_grid(drv ~ cyl)`? Como elas funcionam a este gráfico?
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = drv, y = cyl))
@@ -122,46 +137,57 @@ ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_grid(drv ~ cyl)
 ```
-**Resposta:** Algumas facetas ficarão em branco pois não existem dados com essas combinações de valores das duas variáveis. Assim com no primeiro gráfico há valores que não possuem observações. 
 
-3. Que gráficos o código a seguir faz? 
+**Resposta:** Algumas facetas ficarão em branco pois não existem dados com essas combinações de valores das duas variáveis. Assim com no primeiro gráfico há valores que não possuem observações.
+
+3.  Que gráficos o código a seguir faz?
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_grid(drv ~ .)
 ```
+
 **Resposta:** Ele faz um grráfico onde não há colunas mas apenas linhas. Ao contrário do `facet_grid(. ~ drv)`, que só possui colunas e não linhas.
 
-4. Pegue o primeiro gráfico em facetas desta seção:
+4.  Pegue o primeiro gráfico em facetas desta seção:
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_wrap(~ class, nrow = 2)
 ```
+
 Quais são as vantagens de usar facetas, em vez de estética de cor? Quais são as desvatagens? Como o equilíbrio poderia mudar se tivesse um conjunto de dados maior?
 
 **Resposta:** A vantagem é que pode-se ver cada classe separadamente, sem que uma se sobreponha à outra. A desvantagem é que é um pouco mais demorado para se compreender algumas coisas nesse formato, pois se estivessem em um só gráfico com cores diferentes poderia ser mais rápida a compreensão. Quando há muitos valores diferentes de uma variável, fica quase impossível ter algum insight em cima desses gráficos, pois impossibilita a visualização de todos ao mesmo tempo.
 
-5. Leia `?facet_wrap`. O que o `nrow` faz? O que o `ncol` faz? Quais outras opções controlam o layout de painéis individuais? Por que `facet_grid` não tem variáveis `ncol` e `nrow`?  
+5.  Leia `?facet_wrap`. O que o `nrow` faz? O que o `ncol` faz? Quais outras opções controlam o layout de painéis individuais? Por que `facet_grid` não tem variáveis `ncol` e `nrow`?
 
 **Resposta:** `nrow` é o núemro de linhas que as facetas vão ter e `ncol` o número de colunas. Exemplo: se eu tiver 3 facetas e digitar `nrow = 3`, cada linha vai ficar com uma faceta.
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_wrap(~ class, nrow = 4, ncol = 2)
 ```
+
 Outras opções são o argumento `space` que organiza as facetas conforme o eixo x ou y.
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_wrap(~ class, space = "free_x")
 ```
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_wrap(~ class, space = "free_y")
 ```
+
 O `as.table` que altera o layout colocando as facetas originais ao contrário (de baixo para cima).
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
@@ -177,9 +203,11 @@ ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
   facet_grid(~class)
 ```
+
 O `facet_grid` não possui os argumentos `nrow` e `ncol` porque como são combunações de valores de variáveis, o número de linhas e colunas já é pré-definido.
 
-6. Ao usar `facet_grid()` você normalmente deveria colocar a variável com níveis mais singulres nas colunas. Por que?
+6.  Ao usar `facet_grid()` você normalmente deveria colocar a variável com níveis mais singulres nas colunas. Por que?
+
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy))+
@@ -191,6 +219,73 @@ ggplot(data = mpg)+
 ```
 
 **Resposta:** Porque se colocarmos nas linhas as variáveis com multiplos níveis, os gráficos vão encolhendo muito ficando masi difícil de visualizar.
+
+## Página 20
+1. Que geom você usaria para desenhar um gráfico de linha? Um diagrama de caixa (boxplot)? Um histograma? Um gráfico de área?
+
+**Resposta:**
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ))+
+  geom_boxplot(fill = "#A599B5", color = "#00B9AE")
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_line(color = "#A599B5")
+
+ggplot(data = mpg, mapping = aes(x = displ))+
+  geom_histogram(fill = "#A599B5", color = "#00B9AE")
+
+ggplot(data = mpg, mapping = aes(x = year, y = cyl))+
+  geom_area(fill = "#00B9AE")
+```
+2. Execute este código em sua cabeça e preveja como será o resultado. Depois execute o código em R e confira suas previsões.
+
+```
+ggplot(
+    data = mpg,
+    mapping = aes(x = displ, y = hwy, color = drv)
+)+
+    geom_point()+
+    geom_smooth(se = FALSE)
+```
+**Resposta:** Ele criará um gráfico de dispersão entre `displ` e `hwy` com as cores sendo os diferentes valores da variável `drv`. Depois criará uma linha sem a sombra na borda dela, também com cores diferentes conforme a variável `drv`.
+```{r}
+ggplot(
+    data = mpg,
+    mapping = aes(x = displ, y = hwy, color = drv)
+)+
+    geom_point()+
+    geom_smooth(se = FALSE)
+```
+
+
+3. O que `show_legend = FALSE` faz? O que acontece se você removê-lo? Por que você acha que usei isso anteriormente no capítulo?
+
+**Resposta:** Ele esconde a legenda de cores/formas/tamanhos do `mapping`. Caso removido ele mostra a legenda com cores. Acho que usou para mostrar que quando há cores envolvidas o `ggplot` automaticamente mostra a legenda, o que não acontece em outros gráficos sem cores como `aes.`
+
+4. O que o argumento `se`para `geom_smooth()` faz?
+**Resposta:** Esconde aquela sombra que fica em torno da linha.
+
+5. Esses gráficos serão diferentes? Por que/por que não?
+
+```
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_point()+
+  geom_smooth()
+  
+ggplot()+
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+```
+**Resposta:** Não serão diferentes pois o que muda é só a sintaxe.
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_point()+
+  geom_smooth()
+  
+ggplot()+
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy))+
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+```
 
 
 
