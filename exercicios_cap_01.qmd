@@ -317,5 +317,103 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy))+
 
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv))+
   geom_point(shape = 21, color = "white", size = 3,stroke = 2 )
+
 ```
+## Página 26
+1. Qual é o geom padrão associado a `stat_summary`? Como você poderia reescrever o gráfico anterior usando a função geom, em vez da funcão `stat`?
+
+**Resposta:** O `geom_pointrange`.
+```{r}
+?stat_summary
+
+ggplot(data = diamonds)+
+  geom_pointrange(
+    mapping = aes(x = cut, y = depth),
+    stat = "summary",
+    fun.min = min,
+    fun.max = max,
+    fun = median)
+```
+2. O que `geom_col()` faz? Qual a diferença entre ele e `geom_bar()`?
+**Resposta:** O `geom_bar` usa a frequência daquele nível na variável y e o `geom_col` utiliza alguma variável dentro do conjunto de dados como y. Em resumo, o `geom_col` é um `geom_bar` com argumento `stat = "identity"`.
+```{r}
+ggplot(data = diamonds)+
+  geom_bar(mapping = aes(x = cut))
+
+
+dados <- diamonds %>% count(cut)
+ggplot(data = dados)+
+  geom_col(mapping = aes(x = cut, y = n))
+  
+```
+
+3. A maioria dos geoms e stats vem em pares, que são quase sempre usados juntos. Leia a documentação e faça uma lista de todos os pares. O que eles têm em comum?
+
+**Resposta:** 
+| Stat | Geom |
+| :---: | :---: |
+|`stat_align` | `geom_area`|
+|`stat_bin` | `geom_bar`|
+|`stat_bin_2d` | `geom_tile`|
+|`stat_bin_hex` | `geom_hex`|
+|`stat_bin2d` | `geom_tile`|
+|`stat_binhex` | `geom_hex`|
+|`stat_boxplot` | `geom_boxplot`|
+|`stat_connect` | `geom_path`|
+|`stat_contour` | `geom_contour`|
+|`stat_contour_filled` | `geom_contour_filled`|
+|`stat_count` | `geom_bar`|
+|`stat_density` | `geom_area`|
+|`stat_density_2d` | `geom_density2d`|
+|`stat_density2d_filled` | `geom_density2d_filled`|
+|`stat_ecdf` | `geom_step`|
+|`stat_ellipse` | `geom_path`|
+|`stat_function` | `geom_function`|
+|`stat_identity` | `geom_point`, `geom_spoke`|
+|`stat_manual` | `geom_point`|
+|`stat_qq` | `geom_point`|
+|`stat_qq_line` | `geom_abline`|
+|`stat_quantile` | `geom_quantile`|
+|`stat_sf` | `geom_rect`|
+|`stat_sf_coordinates` | `geom_point`|
+|`stat_smooth` | `geom_smooth`|
+|`stat_sum` | `geom_point`|
+|`stat_summary` | `geom_pointrange`|
+|`stat_summary_2d` | `geom_tile`|
+|`stat_summary_bin` | `geom_pointrange`|
+|`stat_summary_hex` | `geom_hex`|
+|`stat_summary2d` | `geom_tile`|
+|`stat_unique` | `geom_point`|
+|`stat_ydensity` | `geom_violin`|
+|`stat_smooth` | `geom_smooth`|
+|`stat_smooth` | `geom_smooth`|
+
+Ambos apresentam a mesa camada do gráfico.
+
+4. Quais variáveis `stat_smooth` calcula? Quais parâmetros controlam seu comportamento?
+**Resposta:**
+
+`ymin` = o limite inferior do intervalo de confiança para o valor predito.
+`ymax` = o limite superior do intervalo de confiança do valor predito.
+`se` = o erro padrão.
+
+`method` = controla qual algoritmo será usado para calcular a curva.
+`formula` = controla a equação do modelo.
+`se` = controla se o gráfico irá mostrar o erro padrão ou não.
+`fullrange` = se `TRUE` calculará a linha para além dos dados coletados.
+
+5. Em nosso gráfico de barras de `proportion`, precisamos configurar `group = 1`. Por quê? Em outras palavras, qual é o problema com esses dois gráficos.
+```{r}
+ggplot(data = diamonds)+
+  geom_bar(mapping = aes(x = cut, y = ..prop..))
+
+ggplot(data = diamonds)+
+  geom_bar(mapping = aes(x = cut, fill = color, y = ..prop..))
+```
+
+**Resposta:** O problema é que ele vai colocar todos os níveis com proporção 1 e todos os níveis do gráfico 2 terão todas as cores da variável color.
+
+
+
+
 
