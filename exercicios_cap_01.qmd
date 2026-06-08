@@ -1,6 +1,10 @@
 ---
 title: "Exercícios - Capítulo 01"
-format: html
+format:
+  pdf: default
+  html: 
+    theme: cosmo
+    toc: true
 editor: visual
 ---
 
@@ -353,7 +357,45 @@ ggplot(data = dados)+
 
 3.  A maioria dos geoms e stats vem em pares, que são quase sempre usados juntos. Leia a documentação e faça uma lista de todos os pares. O que eles têm em comum?
 
-**Resposta:** \| Stat \| Geom \| \| :---: \| :---: \| \|`stat_align` \| `geom_area`\| \|`stat_bin` \| `geom_bar`\| \|`stat_bin_2d` \| `geom_tile`\| \|`stat_bin_hex` \| `geom_hex`\| \|`stat_bin2d` \| `geom_tile`\| \|`stat_binhex` \| `geom_hex`\| \|`stat_boxplot` \| `geom_boxplot`\| \|`stat_connect` \| `geom_path`\| \|`stat_contour` \| `geom_contour`\| \|`stat_contour_filled` \| `geom_contour_filled`\| \|`stat_count` \| `geom_bar`\| \|`stat_density` \| `geom_area`\| \|`stat_density_2d` \| `geom_density2d`\| \|`stat_density2d_filled` \| `geom_density2d_filled`\| \|`stat_ecdf` \| `geom_step`\| \|`stat_ellipse` \| `geom_path`\| \|`stat_function` \| `geom_function`\| \|`stat_identity` \| `geom_point`, `geom_spoke`\| \|`stat_manual` \| `geom_point`\| \|`stat_qq` \| `geom_point`\| \|`stat_qq_line` \| `geom_abline`\| \|`stat_quantile` \| `geom_quantile`\| \|`stat_sf` \| `geom_rect`\| \|`stat_sf_coordinates` \| `geom_point`\| \|`stat_smooth` \| `geom_smooth`\| \|`stat_sum` \| `geom_point`\| \|`stat_summary` \| `geom_pointrange`\| \|`stat_summary_2d` \| `geom_tile`\| \|`stat_summary_bin` \| `geom_pointrange`\| \|`stat_summary_hex` \| `geom_hex`\| \|`stat_summary2d` \| `geom_tile`\| \|`stat_unique` \| `geom_point`\| \|`stat_ydensity` \| `geom_violin`\| \|`stat_smooth` \| `geom_smooth`\| \|`stat_smooth` \| `geom_smooth`\|
+**Resposta:**
+
+| Stat | Geom | 
+| :---: | :---: | 
+|`stat_align` | `geom_area`| 
+|`stat_bin` | `geom_bar`| 
+|`stat_bin_2d` | `geom_tile`| 
+|`stat_bin_hex` | `geom_hex`| 
+|`stat_bin2d` | `geom_tile`| 
+|`stat_binhex` | `geom_hex`|
+|`stat_boxplot` | `geom_boxplot`|
+|`stat_connect` | `geom_path`| 
+|`stat_contour` | `geom_contour`| 
+|`stat_contour_filled` | `geom_contour_filled`| 
+|`stat_count` | `geom_bar`|
+|`stat_density` | `geom_area`|
+|`stat_density_2d` | `geom_density2d`| 
+|`stat_density2d_filled` | `geom_density2d_filled`| 
+|`stat_ecdf` | `geom_step`| 
+|`stat_ellipse` | `geom_path`|
+|`stat_function` | `geom_function`| 
+|`stat_identity` | `geom_point`, `geom_spoke`|
+|`stat_manual` | `geom_point`| 
+|`stat_qq` | `geom_point`| 
+|`stat_qq_line` | `geom_abline`|
+|`stat_quantile` | `geom_quantile`| 
+|`stat_sf` | `geom_rect`| 
+|`stat_sf_coordinates` | `geom_point`| 
+|`stat_smooth` | `geom_smooth`|
+|`stat_sum` | `geom_point`| 
+|`stat_summary` | `geom_pointrange`| 
+|`stat_summary_2d` | `geom_tile`|
+|`stat_summary_bin` | `geom_pointrange`| 
+|`stat_summary_hex` | `geom_hex`| 
+|`stat_summary2d` | `geom_tile`| 
+|`stat_unique` | `geom_point`| 
+|`stat_ydensity` | `geom_violin`| 
+|`stat_smooth` | `geom_smooth`| 
+|`stat_smooth` | `geom_smooth`|
 
 Ambos apresentam a mesa camada do gráfico.
 
@@ -423,5 +465,45 @@ ggplot(data = mpg_modificado) +
 
 ```
 
+## Página 33
+
+1. Transforme um gráfico de barras empilhadas em um gráfico de pizza usando `coord_polar()`.
+
+**Resposta:**
+```{r}
+ggplot(data = diamonds)+
+  geom_bar(mapping = aes(x = cut, fill = clarity))+
+  coord_polar()
+```
+ 
+2. O que `labs()` faz? Leia a documentação.
+**Resposta:** Adiciona título, subtítulo, legendas aos eixos e legenda ao gráfico.
+
+3. Qual é a diferença entre `coord_quickmap()` e `coord_map`?
+```{r}
+nz <- map_data("nz")
+
+ggplot(nz, aes(long, lat, group = group))+
+  geom_polygon(fill = "white", color = "black")+
+  coord_quickmap()
+
+ggplot(nz, aes(long, lat, group = group))+
+  geom_polygon(fill = "white", color = "black")+
+  coord_map()
+```
+**Resposta:** Olhando assim, parece que não há diferença. Mas na documentação está escrito que `coord_map()` corrige as curvas e linhas e `coord_quickmap()` é uma aproximação rápida que preserva as linhas retas mas ignora a curvatura da terra. `coord_map()` é melhor para projetar áreas grandes do mundo inteiro, já `coord_map()` trabalha melhor com áreas menores próximas à linha do equador, onde a distorção é mínima.
+
+4. O que o gráfico a seguir lhe diz sobre a relação entre `mpg` de cidade e estrada?
+Por que `coord_fixed()` é importante? O que `geom_abline()` faz?
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy))+
+  geom_point()+
+    geom_abline()+
+  coord_fixed()
+```
+
+**Resposta:** Que na cidade geralmente se gasta mais combustível do que na estrada.
+O `coord_fixed()` é importante porque força uma proprção específica entre a representação de unidades dos dados nos eixos. A proporção representa o número de unidades de y equivalente a uma unidade de x. Já o `geom_abline()` traça uma linha onde `x = y` para entender melhor se $y > x$, ou $y < x$. No caso desse gráfico, $y > x$.
 
 

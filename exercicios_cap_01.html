@@ -69,15 +69,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="exercicios_cap_01_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="exercicios_cap_01_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="exercicios_cap_01_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="exercicios_cap_01_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="exercicios_cap_01_files/libs/bootstrap/bootstrap-a74871fe4945b66d259aafc266475145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#página-6" id="toc-página-6" class="nav-link active" data-scroll-target="#página-6">Página 6</a></li>
+  <li><a href="#página-12" id="toc-página-12" class="nav-link" data-scroll-target="#página-12">Página 12</a></li>
+  <li><a href="#página-15" id="toc-página-15" class="nav-link" data-scroll-target="#página-15">Página 15</a></li>
+  <li><a href="#página-20" id="toc-página-20" class="nav-link" data-scroll-target="#página-20">Página 20</a></li>
+  <li><a href="#página-26" id="toc-página-26" class="nav-link" data-scroll-target="#página-26">Página 26</a></li>
+  <li><a href="#página-31" id="toc-página-31" class="nav-link" data-scroll-target="#página-31">Página 31</a></li>
+  <li><a href="#página-33" id="toc-página-33" class="nav-link" data-scroll-target="#página-33">Página 33</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="exercicios_cap_01.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -743,7 +786,157 @@ ggplot()+
 <ol start="3" type="1">
 <li>A maioria dos geoms e stats vem em pares, que são quase sempre usados juntos. Leia a documentação e faça uma lista de todos os pares. O que eles têm em comum?</li>
 </ol>
-<p><strong>Resposta:</strong> | Stat | Geom | | :—: | :—: | |<code>stat_align</code> | <code>geom_area</code>| |<code>stat_bin</code> | <code>geom_bar</code>| |<code>stat_bin_2d</code> | <code>geom_tile</code>| |<code>stat_bin_hex</code> | <code>geom_hex</code>| |<code>stat_bin2d</code> | <code>geom_tile</code>| |<code>stat_binhex</code> | <code>geom_hex</code>| |<code>stat_boxplot</code> | <code>geom_boxplot</code>| |<code>stat_connect</code> | <code>geom_path</code>| |<code>stat_contour</code> | <code>geom_contour</code>| |<code>stat_contour_filled</code> | <code>geom_contour_filled</code>| |<code>stat_count</code> | <code>geom_bar</code>| |<code>stat_density</code> | <code>geom_area</code>| |<code>stat_density_2d</code> | <code>geom_density2d</code>| |<code>stat_density2d_filled</code> | <code>geom_density2d_filled</code>| |<code>stat_ecdf</code> | <code>geom_step</code>| |<code>stat_ellipse</code> | <code>geom_path</code>| |<code>stat_function</code> | <code>geom_function</code>| |<code>stat_identity</code> | <code>geom_point</code>, <code>geom_spoke</code>| |<code>stat_manual</code> | <code>geom_point</code>| |<code>stat_qq</code> | <code>geom_point</code>| |<code>stat_qq_line</code> | <code>geom_abline</code>| |<code>stat_quantile</code> | <code>geom_quantile</code>| |<code>stat_sf</code> | <code>geom_rect</code>| |<code>stat_sf_coordinates</code> | <code>geom_point</code>| |<code>stat_smooth</code> | <code>geom_smooth</code>| |<code>stat_sum</code> | <code>geom_point</code>| |<code>stat_summary</code> | <code>geom_pointrange</code>| |<code>stat_summary_2d</code> | <code>geom_tile</code>| |<code>stat_summary_bin</code> | <code>geom_pointrange</code>| |<code>stat_summary_hex</code> | <code>geom_hex</code>| |<code>stat_summary2d</code> | <code>geom_tile</code>| |<code>stat_unique</code> | <code>geom_point</code>| |<code>stat_ydensity</code> | <code>geom_violin</code>| |<code>stat_smooth</code> | <code>geom_smooth</code>| |<code>stat_smooth</code> | <code>geom_smooth</code>|</p>
+<p><strong>Resposta:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Stat</th>
+<th style="text-align: center;">Geom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_align</code></td>
+<td style="text-align: center;"><code>geom_area</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_bin</code></td>
+<td style="text-align: center;"><code>geom_bar</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_bin_2d</code></td>
+<td style="text-align: center;"><code>geom_tile</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_bin_hex</code></td>
+<td style="text-align: center;"><code>geom_hex</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_bin2d</code></td>
+<td style="text-align: center;"><code>geom_tile</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_binhex</code></td>
+<td style="text-align: center;"><code>geom_hex</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_boxplot</code></td>
+<td style="text-align: center;"><code>geom_boxplot</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_connect</code></td>
+<td style="text-align: center;"><code>geom_path</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_contour</code></td>
+<td style="text-align: center;"><code>geom_contour</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_contour_filled</code></td>
+<td style="text-align: center;"><code>geom_contour_filled</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_count</code></td>
+<td style="text-align: center;"><code>geom_bar</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_density</code></td>
+<td style="text-align: center;"><code>geom_area</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_density_2d</code></td>
+<td style="text-align: center;"><code>geom_density2d</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_density2d_filled</code></td>
+<td style="text-align: center;"><code>geom_density2d_filled</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_ecdf</code></td>
+<td style="text-align: center;"><code>geom_step</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_ellipse</code></td>
+<td style="text-align: center;"><code>geom_path</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_function</code></td>
+<td style="text-align: center;"><code>geom_function</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_identity</code></td>
+<td style="text-align: center;"><code>geom_point</code>, <code>geom_spoke</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_manual</code></td>
+<td style="text-align: center;"><code>geom_point</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_qq</code></td>
+<td style="text-align: center;"><code>geom_point</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_qq_line</code></td>
+<td style="text-align: center;"><code>geom_abline</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_quantile</code></td>
+<td style="text-align: center;"><code>geom_quantile</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_sf</code></td>
+<td style="text-align: center;"><code>geom_rect</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_sf_coordinates</code></td>
+<td style="text-align: center;"><code>geom_point</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_smooth</code></td>
+<td style="text-align: center;"><code>geom_smooth</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_sum</code></td>
+<td style="text-align: center;"><code>geom_point</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_summary</code></td>
+<td style="text-align: center;"><code>geom_pointrange</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_summary_2d</code></td>
+<td style="text-align: center;"><code>geom_tile</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_summary_bin</code></td>
+<td style="text-align: center;"><code>geom_pointrange</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_summary_hex</code></td>
+<td style="text-align: center;"><code>geom_hex</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_summary2d</code></td>
+<td style="text-align: center;"><code>geom_tile</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_unique</code></td>
+<td style="text-align: center;"><code>geom_point</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_ydensity</code></td>
+<td style="text-align: center;"><code>geom_violin</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>stat_smooth</code></td>
+<td style="text-align: center;"><code>geom_smooth</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>stat_smooth</code></td>
+<td style="text-align: center;"><code>geom_smooth</code></td>
+</tr>
+</tbody>
+</table>
 <p>Ambos apresentam a mesa camada do gráfico.</p>
 <ol start="4" type="1">
 <li>Quais variáveis <code>stat_smooth</code> calcula? Quais parâmetros controlam seu comportamento? <strong>Resposta:</strong></li>
@@ -868,6 +1061,71 @@ ggplot()+
 </div>
 </div>
 </div>
+</section>
+<section id="página-33" class="level2">
+<h2 class="anchored" data-anchor-id="página-33">Página 33</h2>
+<ol type="1">
+<li>Transforme um gráfico de barras empilhadas em um gráfico de pizza usando <code>coord_polar()</code>.</li>
+</ol>
+<p><strong>Resposta:</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds)<span class="sc">+</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">fill =</span> clarity))<span class="sc">+</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercicios_cap_01_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>O que <code>labs()</code> faz? Leia a documentação. <strong>Resposta:</strong> Adiciona título, subtítulo, legendas aos eixos e legenda ao gráfico.</p></li>
+<li><p>Qual é a diferença entre <code>coord_quickmap()</code> e <code>coord_map</code>?</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>nz <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"nz"</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nz, <span class="fu">aes</span>(long, lat, <span class="at">group =</span> group))<span class="sc">+</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_quickmap</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercicios_cap_01_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nz, <span class="fu">aes</span>(long, lat, <span class="at">group =</span> group))<span class="sc">+</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_map</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercicios_cap_01_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Resposta:</strong> Olhando assim, parece que não há diferença. Mas na documentação está escrito que <code>coord_map()</code> corrige as curvas e linhas e <code>coord_quickmap()</code> é uma aproximação rápida que preserva as linhas retas mas ignora a curvatura da terra. <code>coord_map()</code> é melhor para projetar áreas grandes do mundo inteiro, já <code>coord_map()</code> trabalha melhor com áreas menores próximas à linha do equador, onde a distorção é mínima.</p>
+<ol start="4" type="1">
+<li>O que o gráfico a seguir lhe diz sobre a relação entre <code>mpg</code> de cidade e estrada? Por que <code>coord_fixed()</code> é importante? O que <code>geom_abline()</code> faz?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy))<span class="sc">+</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>()<span class="sc">+</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercicios_cap_01_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Resposta:</strong> Que na cidade geralmente se gasta mais combustível do que na estrada. O <code>coord_fixed()</code> é importante porque força uma proprção específica entre a representação de unidades dos dados nos eixos. A proporção representa o número de unidades de y equivalente a uma unidade de x. Já o <code>geom_abline()</code> traça uma linha onde <code>x = y</code> para entender melhor se <span class="math inline">\(y &gt; x\)</span>, ou <span class="math inline">\(y &lt; x\)</span>. No caso desse gráfico, <span class="math inline">\(y &gt; x\)</span>.</p>
 </section>
 
 </main>
