@@ -151,3 +151,53 @@ ggplot(data = diamonds)+
     fun.ymax = max,
     fun.y = median
   )
+
+# pag 27 
+ggplot(data = diamonds)+
+  geom_bar(mapping = aes(x = cut, colour = cut))
+
+ggplot(data = diamonds)+
+  geom_bar(mapping = aes(x = cut, fill = cut))
+
+ggplot(data = diamonds)+
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+
+# pag 28
+
+ggplot(
+  data = diamonds,
+  mapping = aes(x = cut, fill = clarity)
+)+
+  geom_bar(alpha = 1/5, position = "identity") # cada nível de clarity começa do zero
+
+ggplot(
+  data = diamonds,
+  mapping = aes(x = cut, color = clarity)
+)+
+  geom_bar(fill = NA, position = "identity")
+
+ggplot(data = diamonds)+
+  geom_bar(
+    mapping = aes(x = cut, fill = clarity),
+    position = "fill"
+  )
+
+ggplot(data = diamonds)+
+  geom_bar(
+    mapping = aes(x = cut, fill = clarity),
+    position = "dodge"
+  )
+
+# pag 30
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy),
+             position = "jitter")
+
+ggplot(data = mpg)+
+  geom_jitter(mapping = aes(x = displ, y = hwy))
+
+?position_dodge
+?position_fill
+?position_identity
+?position_jitter
+?position_stack
