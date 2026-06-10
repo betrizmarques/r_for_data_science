@@ -1,0 +1,44 @@
+---
+title: "Exercícios - Capítulo 02"
+format:
+  pdf: default
+  html: 
+    theme: cosmo
+    toc: true
+editor: visual
+---
+
+## Página 40
+
+1. Por que este código não funciona?
+```{r, error=TRUE}
+my_variable <- 10
+my_varIable
+```
+
+**Resposta:** Porque o nome que chamamos no console está diferente do nome da variável criada. O "i" está maiúsculo.
+
+2. Ajuste cada um dos seguintes comandis de R para que executem corretamente:
+```{r, error=TRUE}
+library(tidyverse)
+
+ggplot(dota = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+fliter(mpg, cyl = 8)
+filter(diamond, carat > 3)
+```
+**Resposta:** Há vários erros de digitação aí. Primeiramente, o `data` está como `dota`, depois o `filter` está `fliter`, o `=` era pra ser `==` e por último, o `diamond` era para ser `diamonds`.
+```{r}
+library(tidyverse)
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+filter(mpg, cyl == 8)
+filter(diamonds, carat > 3)
+```
+3. Pressione Alt-Shift-K. O que acontece? Como você pode chegar ao mesmo resultado usando menus?
+
+**Resposta:** Quando pressiono Alt-Shift-K, todos os comandos de atalhos no teclado aparecem. Posso chegar no mesmo resultado usando Tools > Keyboard Shortcut Help.
+
