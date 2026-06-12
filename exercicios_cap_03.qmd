@@ -48,3 +48,27 @@ g. Saíram entre meia-noite e 6h (incluindo esses horários)
 filter(flights, dep_time %in% seq(0, 600))
 ```
 
+2. Outro ajudante  de filtragem do dplyr é `between()`. O que ele faz? Você consegue utilizá-lo para simplificar o código necessário para responder aos desafios anteriores?
+
+**Resposta:** Ele retorna valores que estão entre os parâmetros que eu colocar. Posso utilizálo para responder a questão d) e g).
+```{r}
+?between
+# d
+filter(flights, between(month, 7, 9))
+
+# g
+filter(flights, between(dep_time, 0, 600))
+```
+3. Quantos voos têm um `dep_time` faltante? Que outras variáveis estão faltando? O que essas linhas podem representar?
+```{r}
+filter(flights, is.na(dep_time))
+```
+**Resposta:** 8.225 voos. Na minha visão são voos que foram cancelados.
+
+4. Por que `NA ^ 0` não é um valor faltante? Por que `NA | TRUE` não é um valor faltante? Por que `FALSE & NA` não é um valor faltante? Você consegue descobrir a regra geral?
+
+**Resposta:** Pois qualquer número elevado a 0 é 1, mesmo se o `NA` for `TRUE` ou `FALSE`. Pois qualquer coisa OU `TRUE` é verdadeiro. Pois qualquer coisa & `FALSE`, dá `FALSE` pela regra de lógica matemática. A regra geral é que o R não retornará `NA` se qualquer coisa que substituir aquele `NA`, dá o mesmo resultado. Exemplo: `TRUE` | `FALSE`, dá `TRUE`, ou seja se o `NA` for `FALSE`, `TRUE` ou até mesmo um número real, ele vai retornar `TRUE`. Isso aplica até mesmo para NA do tipo `NA_character_`.
+
+
+
+
