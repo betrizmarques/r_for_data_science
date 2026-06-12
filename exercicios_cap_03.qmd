@@ -1,0 +1,50 @@
+---
+title: "Exercícios - Capítulo 03"
+format:
+  pdf: default
+  html: 
+    theme: cosmo
+    toc: true
+editor: visual
+---
+
+## Página 49
+1. Encontre todos os voos que:
+a. Tiveram um atraso de duas horas ou mais na chegada.
+```{r}
+library(nycflights13)
+library(dplyr)
+
+filter(flights, arr_delay >= 120)
+```
+
+b. Foram para Houston (IAH ou HOU).
+```{r}
+filter(flights, dest %in% c("IAH", "HOU"))
+```
+
+c. Foram operados pela United, American ou Delta.
+```{r}
+filter(flights, carrier %in% c("UA", "AA", "DL"))
+```
+
+d. Partiram em julho, agosto e setembro.
+```{r}
+filter(flights, month %in% seq(7,9))
+```
+
+e. Chegaram com mais de duas horas de atraso, mas não saíram atrasados.
+```{r}
+filter(flights, arr_delay > 120, dep_delay <= 0)
+```
+
+f. Atrasaram pelo menos uma hora, mas compensaram mais de 30 minutos durante o trajeto.
+```{r}
+filter(flights, dep_delay >= 60, (dep_delay - arr_delay) > 30)
+```
+
+g. Saíram entre meia-noite e 6h (incluindo esses horários)
+```{r}
+filter(flights, dep_time %in% seq(0, 600))
+```
+
