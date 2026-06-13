@@ -61,3 +61,12 @@ filter(df, x > 1)
 
 filter(df, is.na(x) | x > 1)
 
+# pag 50
+arrange(flights, year, month, day)
+
+arrange(flights, desc(arr_delay))
+
+# pag 51
+df <- tibble(x = c(5, 2, NA))
+arrange(df, x)
+
