@@ -9,8 +9,13 @@ editor: visual
 ---
 
 ## Página 49
-1. Encontre todos os voos que:
-a. Tiveram um atraso de duas horas ou mais na chegada.
+
+1.  Encontre todos os voos que:
+
+<!-- -->
+
+a.  Tiveram um atraso de duas horas ou mais na chegada.
+
 ```{r}
 library(nycflights13)
 library(dplyr)
@@ -18,39 +23,46 @@ library(dplyr)
 filter(flights, arr_delay >= 120)
 ```
 
-b. Foram para Houston (IAH ou HOU).
+b.  Foram para Houston (IAH ou HOU).
+
 ```{r}
 filter(flights, dest %in% c("IAH", "HOU"))
 ```
 
-c. Foram operados pela United, American ou Delta.
+c.  Foram operados pela United, American ou Delta.
+
 ```{r}
 filter(flights, carrier %in% c("UA", "AA", "DL"))
 ```
 
-d. Partiram em julho, agosto e setembro.
+d.  Partiram em julho, agosto e setembro.
+
 ```{r}
 filter(flights, month %in% seq(7,9))
 ```
 
-e. Chegaram com mais de duas horas de atraso, mas não saíram atrasados.
+e.  Chegaram com mais de duas horas de atraso, mas não saíram atrasados.
+
 ```{r}
 filter(flights, arr_delay > 120, dep_delay <= 0)
 ```
 
-f. Atrasaram pelo menos uma hora, mas compensaram mais de 30 minutos durante o trajeto.
+f.  Atrasaram pelo menos uma hora, mas compensaram mais de 30 minutos durante o trajeto.
+
 ```{r}
 filter(flights, dep_delay >= 60, (dep_delay - arr_delay) > 30)
 ```
 
-g. Saíram entre meia-noite e 6h (incluindo esses horários)
+g.  Saíram entre meia-noite e 6h (incluindo esses horários)
+
 ```{r}
 filter(flights, dep_time %in% seq(0, 600))
 ```
 
-2. Outro ajudante  de filtragem do dplyr é `between()`. O que ele faz? Você consegue utilizá-lo para simplificar o código necessário para responder aos desafios anteriores?
+2.  Outro ajudante de filtragem do dplyr é `between()`. O que ele faz? Você consegue utilizá-lo para simplificar o código necessário para responder aos desafios anteriores?
 
 **Resposta:** Ele retorna valores que estão entre os parâmetros que eu colocar. Posso utilizálo para responder a questão d) e g).
+
 ```{r}
 ?between
 # d
@@ -59,16 +71,22 @@ filter(flights, between(month, 7, 9))
 # g
 filter(flights, between(dep_time, 0, 600))
 ```
-3. Quantos voos têm um `dep_time` faltante? Que outras variáveis estão faltando? O que essas linhas podem representar?
+
+3.  Quantos voos têm um `dep_time` faltante? Que outras variáveis estão faltando? O que essas linhas podem representar?
+
 ```{r}
 filter(flights, is.na(dep_time))
 ```
+
 **Resposta:** 8.225 voos. Na minha visão são voos que foram cancelados.
 
-4. Por que `NA ^ 0` não é um valor faltante? Por que `NA | TRUE` não é um valor faltante? Por que `FALSE & NA` não é um valor faltante? Você consegue descobrir a regra geral?
+4.  Por que `NA ^ 0` não é um valor faltante? Por que `NA | TRUE` não é um valor faltante? Por que `FALSE & NA` não é um valor faltante? Você consegue descobrir a regra geral?
 
-**Resposta:** Pois qualquer número elevado a 0 é 1, mesmo se o `NA` for `TRUE` ou `FALSE`. Pois qualquer coisa OU `TRUE` é verdadeiro. Pois qualquer coisa & `FALSE`, dá `FALSE` pela regra de lógica matemática. A regra geral é que o R não retornará `NA` se qualquer coisa que substituir aquele `NA`, dá o mesmo resultado. Exemplo: `TRUE` | `FALSE`, dá `TRUE`, ou seja se o `NA` for `FALSE`, `TRUE` ou até mesmo um número real, ele vai retornar `TRUE`. Isso aplica até mesmo para NA do tipo `NA_character_`.
+**Resposta:** Pois qualquer número elevado a 0 é 1, mesmo se o `NA` for `TRUE` ou `FALSE`. Pois qualquer coisa OU `TRUE` é verdadeiro. Pois qualquer coisa & `FALSE`, dá `FALSE` pela regra de lógica matemática. A regra geral é que o R não retornará `NA` se qualquer coisa que substituir aquele `NA`, dá o mesmo resultado. Exemplo: `TRUE` \| `FALSE`, dá `TRUE`, ou seja se o `NA` for `FALSE`, `TRUE` ou até mesmo um número real, ele vai retornar `TRUE`. Isso aplica até mesmo para NA do tipo `NA_character_`.
 
-
-
+## Página 51
+1. Como você poderia usar `arrange()` para classificar todos os valores faltantes no começo?
+```{r}
+arrange(flights, desc(is.na(arr_delay)))
+```
 
